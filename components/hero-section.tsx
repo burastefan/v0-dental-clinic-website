@@ -77,13 +77,16 @@ export function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <Link
-        href="/despre"
+      <button
+        onClick={() => {
+          const el = document.getElementById("despre")
+          if (el) el.scrollIntoView({ behavior: "smooth" })
+        }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-background/60 transition-colors hover:text-background animate-bounce"
         aria-label="Learn more"
       >
         <ArrowDown className="h-5 w-5" />
-      </Link>
+      </button>
     </section>
   )
 }

@@ -8,7 +8,7 @@ export function Footer() {
   const { t, lang } = useLanguage()
 
   const navLinks = [
-    { label: t.nav.about, href: "/despre" },
+    { label: t.nav.about, href: "/#despre" },
     { label: t.nav.services, href: "/servicii" },
     { label: t.nav.contact, href: "/contact" },
     {

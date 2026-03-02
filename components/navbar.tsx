@@ -24,7 +24,7 @@ export function Navbar() {
   }, [])
 
   const navLinks = [
-    { label: t.nav.about, href: "/despre" },
+    { label: t.nav.about, href: "/#despre" },
     { label: t.nav.services, href: "/servicii" },
     { label: t.nav.contact, href: "/contact" },
   ]
@@ -59,7 +59,9 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href
+              const isActive = link.href.startsWith("/#")
+                ? pathname === "/" && false
+                : pathname === link.href
               return (
                 <Link
                   key={link.href}
@@ -115,7 +117,9 @@ export function Navbar() {
         <div className="bg-background/95 backdrop-blur-md px-4 pb-4 pt-2">
           <div className="flex flex-col gap-1">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href
+              const isActive = link.href.startsWith("/#")
+                ? pathname === "/"  && false
+                : pathname === link.href
               return (
                 <Link
                   key={link.href}
