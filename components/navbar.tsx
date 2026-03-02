@@ -2,14 +2,18 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu, X, Phone } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { LanguageSwitcher } from "./language-switcher"
 
 export function Navbar() {
   const { t } = useLanguage()
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  const isHome = pathname === "/"
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,41 +23,34 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const scrollToSection = (id: string) => {
-    setIsOpen(false)
-    const element = document.getElementById(id)
-    if (element) {
-      const offset = 80
-      const bodyRect = document.body.getBoundingClientRect().top
-      const elementRect = element.getBoundingClientRect().top
-      const elementPosition = elementRect - bodyRect
-      const offsetPosition = elementPosition - offset
-      window.scrollTo({ top: offsetPosition, behavior: "smooth" })
-    }
-  }
+  const navLinks = [
+    { label: t.nav.about, href: "/despre" },
+    { label: t.nav.services, href: "/servicii" },
+    { label: t.nav.contact, href: "/contact" },
+  ]
+
+  const showTransparent = isHome && !scrolled
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/95 backdrop-blur-md shadow-sm border-b border-border"
-          : "bg-transparent"
+        showTransparent
+          ? "bg-transparent"
+          : "bg-background/95 backdrop-blur-md shadow-sm border-b border-border"
       }`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between lg:h-20">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-2"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          >
+          <Link href="/" className="flex items-center gap-2">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
               <span className="text-sm font-bold text-primary-foreground">IB</span>
             </div>
             <div className="hidden sm:block">
-              <p className="text-sm font-semibold text-foreground leading-tight">Dr. Irina Bosinceanu</p>
-              <p className="text-xs text-muted-foreground leading-tight">
+              <p className={`text-sm font-semibold leading-tight ${showTransparent ? "text-background" : "text-foreground"}`}>
+                Dr. Irina Bosinceanu
+              </p>
+              <p className={`text-xs leading-tight ${showTransparent ? "text-background/70" : "text-muted-foreground"}`}>
                 {t.hero.greeting}
               </p>
             </div>
@@ -61,24 +58,26 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-1 md:flex">
-            <button
-              onClick={() => scrollToSection("about")}
-              className="rounded-lg px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
-            >
-              {t.nav.about}
-            </button>
-            <button
-              onClick={() => scrollToSection("services")}
-              className="rounded-lg px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
-            >
-              {t.nav.services}
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="rounded-lg px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
-            >
-              {t.nav.contact}
-            </button>
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                    showTransparent
+                      ? isActive
+                        ? "bg-background/20 text-background"
+                        : "text-background/80 hover:bg-background/10 hover:text-background"
+                      : isActive
+                        ? "bg-primary/10 text-primary"
+                        : "text-foreground hover:bg-muted hover:text-primary"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
           </div>
 
           {/* Right side */}
@@ -94,7 +93,11 @@ export function Navbar() {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="flex h-10 w-10 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-muted md:hidden"
+              className={`flex h-10 w-10 items-center justify-center rounded-lg transition-colors md:hidden ${
+                showTransparent
+                  ? "text-background hover:bg-background/10"
+                  : "text-foreground hover:bg-muted"
+              }`}
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -111,24 +114,23 @@ export function Navbar() {
       >
         <div className="bg-background/95 backdrop-blur-md px-4 pb-4 pt-2">
           <div className="flex flex-col gap-1">
-            <button
-              onClick={() => scrollToSection("about")}
-              className="rounded-lg px-4 py-3 text-left text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
-            >
-              {t.nav.about}
-            </button>
-            <button
-              onClick={() => scrollToSection("services")}
-              className="rounded-lg px-4 py-3 text-left text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
-            >
-              {t.nav.services}
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="rounded-lg px-4 py-3 text-left text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
-            >
-              {t.nav.contact}
-            </button>
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors ${
+                    isActive
+                      ? "bg-primary/10 text-primary"
+                      : "text-foreground hover:bg-muted hover:text-primary"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
             <a
               href="tel:+40XXXXXXXXX"
               className="flex items-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"

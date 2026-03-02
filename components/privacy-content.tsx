@@ -57,7 +57,7 @@ export function PrivacyContent() {
             className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
           >
             <ArrowLeft className="h-4 w-4" />
-            {t.nav.about}
+            {lang === "ro" ? "Inapoi la pagina principala" : "Back to homepage"}
           </Link>
         </div>
       </main>

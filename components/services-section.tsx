@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import {
   Stethoscope,
   Sparkles,
@@ -50,7 +51,7 @@ export function ServicesSection() {
   const services = t.services.list as unknown as ServiceItem[]
 
   return (
-    <section id="services" className="py-20 lg:py-28 bg-secondary">
+    <section className="py-20 lg:py-28 bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="mb-16 text-center">
@@ -225,25 +226,12 @@ export function ServicesSection() {
               </div>
 
               {/* CTA */}
-              <button
-                onClick={() => {
-                  setSelectedService(null)
-                  setTimeout(() => {
-                    const el = document.getElementById("contact")
-                    if (el) {
-                      const offset = 80
-                      const bodyRect = document.body.getBoundingClientRect().top
-                      const elementRect = el.getBoundingClientRect().top
-                      const elementPosition = elementRect - bodyRect
-                      const offsetPosition = elementPosition - offset
-                      window.scrollTo({ top: offsetPosition, behavior: "smooth" })
-                    }
-                  }, 300)
-                }}
-                className="w-full rounded-lg bg-primary py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+              <Link
+                href="/contact"
+                className="block w-full rounded-lg bg-primary py-3 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 {t.services.bookNow}
-              </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,23 +1,12 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { ArrowDown } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 
 export function HeroSection() {
   const { t } = useLanguage()
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      const offset = 80
-      const bodyRect = document.body.getBoundingClientRect().top
-      const elementRect = element.getBoundingClientRect().top
-      const elementPosition = elementRect - bodyRect
-      const offsetPosition = elementPosition - offset
-      window.scrollTo({ top: offsetPosition, behavior: "smooth" })
-    }
-  }
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -56,18 +45,18 @@ export function HeroSection() {
 
           {/* CTAs */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <button
-              onClick={() => scrollToSection("services")}
+            <Link
+              href="/servicii"
               className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl"
             >
               {t.hero.cta1}
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
+            </Link>
+            <Link
+              href="/contact"
               className="inline-flex items-center justify-center rounded-lg border border-background/30 bg-background/10 px-6 py-3 text-sm font-semibold text-background backdrop-blur-sm transition-all hover:bg-background/20"
             >
               {t.hero.cta2}
-            </button>
+            </Link>
           </div>
 
           {/* Stats row */}
@@ -88,13 +77,13 @@ export function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <button
-        onClick={() => scrollToSection("about")}
+      <Link
+        href="/despre"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-background/60 transition-colors hover:text-background animate-bounce"
-        aria-label="Scroll down"
+        aria-label="Learn more"
       >
         <ArrowDown className="h-5 w-5" />
-      </button>
+      </Link>
     </section>
   )
 }
