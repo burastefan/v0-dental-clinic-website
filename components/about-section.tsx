@@ -8,10 +8,10 @@ export function AboutSection() {
   const { t } = useLanguage()
 
   return (
-    <section id="about" className="py-20 lg:py-28 bg-background">
+    <section className="py-14 lg:py-20 bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="mb-16 text-center">
+        <div className="mb-10 text-center">
           <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider">
             {t.about.sectionLabel}
           </span>

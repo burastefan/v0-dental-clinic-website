@@ -1,23 +1,5 @@
-"use client"
-
-import { Navbar } from "@/components/navbar"
-import { HeroSection } from "@/components/hero-section"
-import { AboutSection } from "@/components/about-section"
-import { ServicesSection } from "@/components/services-section"
-import { ContactSection } from "@/components/contact-section"
-import { Footer } from "@/components/footer"
+import { redirect } from "next/navigation"
 
 export default function HomePage() {
-  return (
-    <>
-      <Navbar />
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <ServicesSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </>
-  )
+  redirect("/despre")
 }
