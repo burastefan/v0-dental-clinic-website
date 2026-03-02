@@ -51,10 +51,10 @@ export function ServicesSection() {
   const services = t.services.list as unknown as ServiceItem[]
 
   return (
-    <section className="py-20 lg:py-28 bg-background">
+    <section className="py-14 lg:py-20 bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="mb-16 text-center">
+        <div className="mb-10 text-center">
           <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider">
             {t.services.sectionLabel}
           </span>
@@ -73,9 +73,10 @@ export function ServicesSection() {
             const isEmergency = index === 7
 
             return (
-              <div
+              <button
                 key={index}
-                className={`group relative rounded-2xl border bg-card p-6 transition-all hover:shadow-lg hover:-translate-y-1 ${
+                onClick={() => setSelectedService(index)}
+                className={`group relative rounded-2xl border bg-card p-6 transition-all hover:shadow-lg hover:-translate-y-1 cursor-pointer text-left ${
                   isEmergency
                     ? "border-destructive/30 bg-destructive/5 hover:border-destructive/50"
                     : "border-border hover:border-primary/30"
@@ -109,23 +110,22 @@ export function ServicesSection() {
                   {service.description}
                 </p>
 
-                {/* Price & CTA */}
+                {/* Price */}
                 <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
                   <span className={`text-sm font-bold ${isEmergency ? "text-destructive" : "text-primary"}`}>
                     {service.price}
                   </span>
-                  <button
-                    onClick={() => setSelectedService(index)}
+                  <span
                     className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
                       isEmergency
-                        ? "bg-destructive/10 text-destructive hover:bg-destructive/20"
-                        : "bg-primary/10 text-primary hover:bg-primary/20"
+                        ? "bg-destructive/10 text-destructive group-hover:bg-destructive/20"
+                        : "bg-primary/10 text-primary group-hover:bg-primary/20"
                     }`}
                   >
                     {t.services.details}
-                  </button>
+                  </span>
                 </div>
-              </div>
+              </button>
             )
           })}
         </div>
