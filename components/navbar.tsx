@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X, Phone } from "lucide-react"
@@ -11,46 +11,27 @@ export function Navbar() {
   const { t } = useLanguage()
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  const isHome = pathname === "/"
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   const navLinks = [
-    { label: t.nav.about, href: "/#despre" },
+    { label: t.nav.about, href: "/despre" },
     { label: t.nav.services, href: "/servicii" },
     { label: t.nav.contact, href: "/contact" },
   ]
 
-  const showTransparent = isHome && !scrolled
-
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        showTransparent
-          ? "bg-transparent"
-          : "bg-background/95 backdrop-blur-md shadow-sm border-b border-border"
-      }`}
-    >
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md shadow-sm border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/despre" className="flex items-center gap-2">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
               <span className="text-sm font-bold text-primary-foreground">IB</span>
             </div>
             <div className="hidden sm:block">
-              <p className={`text-sm font-semibold leading-tight ${showTransparent ? "text-background" : "text-foreground"}`}>
+              <p className="text-sm font-semibold text-foreground leading-tight">
                 Dr. Irina Bosinceanu
               </p>
-              <p className={`text-xs leading-tight ${showTransparent ? "text-background/70" : "text-muted-foreground"}`}>
+              <p className="text-xs text-muted-foreground leading-tight">
                 {t.hero.greeting}
               </p>
             </div>
@@ -59,21 +40,15 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => {
-              const isActive = link.href.startsWith("/#")
-                ? pathname === "/" && false
-                : pathname === link.href
+              const isActive = pathname === link.href
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                    showTransparent
-                      ? isActive
-                        ? "bg-background/20 text-background"
-                        : "text-background/80 hover:bg-background/10 hover:text-background"
-                      : isActive
-                        ? "bg-primary/10 text-primary"
-                        : "text-foreground hover:bg-muted hover:text-primary"
+                    isActive
+                      ? "bg-primary/10 text-primary"
+                      : "text-foreground hover:bg-muted hover:text-primary"
                   }`}
                 >
                   {link.label}
@@ -95,11 +70,7 @@ export function Navbar() {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`flex h-10 w-10 items-center justify-center rounded-lg transition-colors md:hidden ${
-                showTransparent
-                  ? "text-background hover:bg-background/10"
-                  : "text-foreground hover:bg-muted"
-              }`}
+              className="flex h-10 w-10 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-muted md:hidden"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -117,9 +88,7 @@ export function Navbar() {
         <div className="bg-background/95 backdrop-blur-md px-4 pb-4 pt-2">
           <div className="flex flex-col gap-1">
             {navLinks.map((link) => {
-              const isActive = link.href.startsWith("/#")
-                ? pathname === "/"  && false
-                : pathname === link.href
+              const isActive = pathname === link.href
               return (
                 <Link
                   key={link.href}

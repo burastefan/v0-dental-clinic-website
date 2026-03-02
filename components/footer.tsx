@@ -8,7 +8,7 @@ export function Footer() {
   const { t, lang } = useLanguage()
 
   const navLinks = [
-    { label: t.nav.about, href: "/#despre" },
+    { label: t.nav.about, href: "/despre" },
     { label: t.nav.services, href: "/servicii" },
     { label: t.nav.contact, href: "/contact" },
     {
@@ -23,7 +23,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
+            <Link href="/despre" className="flex items-center gap-2 mb-4">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
                 <span className="text-sm font-bold text-primary-foreground">IB</span>
               </div>
