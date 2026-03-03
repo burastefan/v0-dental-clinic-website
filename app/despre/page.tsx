@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { Navbar } from "@/components/navbar"
-import { AboutSection } from "@/components/about-section"
-import { Footer } from "@/components/footer"
+import { AboutSection } from '@/components/about-section'
+import { Footer } from '@/components/footer'
+import { Navbar } from '@/components/navbar'
 
 export default function DesprePage() {
   return (

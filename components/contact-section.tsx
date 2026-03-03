@@ -1,17 +1,17 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { Phone, Mail, MapPin, Clock, CheckCircle2, Send } from "lucide-react"
-import { useLanguage } from "@/lib/language-context"
+import { CheckCircle2, Clock, Mail, MapPin, Phone, Send } from 'lucide-react'
+import { useState } from 'react'
+import { useLanguage } from '@/lib/language-context'
 
 export function ContactSection() {
   const { t, lang } = useLanguage()
   const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
+    name: '',
+    email: '',
+    phone: '',
+    service: '',
+    message: '',
     privacy: false,
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -41,7 +41,7 @@ export function ContactSection() {
     await new Promise((resolve) => setTimeout(resolve, 1500))
     setSending(false)
     setSubmitted(true)
-    setFormState({ name: "", email: "", phone: "", service: "", message: "", privacy: false })
+    setFormState({ name: '', email: '', phone: '', service: '', message: '', privacy: false })
     setTimeout(() => setSubmitted(false), 5000)
   }
 
@@ -83,10 +83,10 @@ export function ContactSection() {
                     value={formState.name}
                     onChange={(e) => {
                       setFormState({ ...formState, name: e.target.value })
-                      if (errors.name) setErrors({ ...errors, name: "" })
+                      if (errors.name) setErrors({ ...errors, name: '' })
                     }}
                     className={`w-full rounded-lg border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 ${
-                      errors.name ? "border-destructive" : "border-border"
+                      errors.name ? 'border-destructive' : 'border-border'
                     }`}
                     placeholder="Dr. Popescu Maria"
                   />
@@ -104,14 +104,16 @@ export function ContactSection() {
                       value={formState.email}
                       onChange={(e) => {
                         setFormState({ ...formState, email: e.target.value })
-                        if (errors.email) setErrors({ ...errors, email: "" })
+                        if (errors.email) setErrors({ ...errors, email: '' })
                       }}
                       className={`w-full rounded-lg border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 ${
-                        errors.email ? "border-destructive" : "border-border"
+                        errors.email ? 'border-destructive' : 'border-border'
                       }`}
                       placeholder="email@exemplu.ro"
                     />
-                    {errors.email && <p className="mt-1 text-xs text-destructive">{errors.email}</p>}
+                    {errors.email && (
+                      <p className="mt-1 text-xs text-destructive">{errors.email}</p>
+                    )}
                   </div>
                   <div>
                     <label className="mb-1.5 block text-sm font-medium text-foreground">
@@ -122,14 +124,16 @@ export function ContactSection() {
                       value={formState.phone}
                       onChange={(e) => {
                         setFormState({ ...formState, phone: e.target.value })
-                        if (errors.phone) setErrors({ ...errors, phone: "" })
+                        if (errors.phone) setErrors({ ...errors, phone: '' })
                       }}
                       className={`w-full rounded-lg border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 ${
-                        errors.phone ? "border-destructive" : "border-border"
+                        errors.phone ? 'border-destructive' : 'border-border'
                       }`}
                       placeholder="+40 7XX XXX XXX"
                     />
-                    {errors.phone && <p className="mt-1 text-xs text-destructive">{errors.phone}</p>}
+                    {errors.phone && (
+                      <p className="mt-1 text-xs text-destructive">{errors.phone}</p>
+                    )}
                   </div>
                 </div>
 
@@ -142,11 +146,11 @@ export function ContactSection() {
                     value={formState.service}
                     onChange={(e) => {
                       setFormState({ ...formState, service: e.target.value })
-                      if (errors.service) setErrors({ ...errors, service: "" })
+                      if (errors.service) setErrors({ ...errors, service: '' })
                     }}
                     className={`w-full rounded-lg border bg-card px-4 py-3 text-sm text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 ${
-                      errors.service ? "border-destructive" : "border-border"
-                    } ${!formState.service ? "text-muted-foreground" : ""}`}
+                      errors.service ? 'border-destructive' : 'border-border'
+                    } ${!formState.service ? 'text-muted-foreground' : ''}`}
                   >
                     <option value="">{t.contact.selectService}</option>
                     {services.map((s, i) => (
@@ -155,13 +159,15 @@ export function ContactSection() {
                       </option>
                     ))}
                   </select>
-                  {errors.service && <p className="mt-1 text-xs text-destructive">{errors.service}</p>}
+                  {errors.service && (
+                    <p className="mt-1 text-xs text-destructive">{errors.service}</p>
+                  )}
                 </div>
 
                 {/* Message */}
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-foreground">
-                    {t.contact.message}{" "}
+                    {t.contact.message}{' '}
                     <span className="text-muted-foreground text-xs">({t.contact.optional})</span>
                   </label>
                   <textarea
@@ -181,21 +187,23 @@ export function ContactSection() {
                       checked={formState.privacy}
                       onChange={(e) => {
                         setFormState({ ...formState, privacy: e.target.checked })
-                        if (errors.privacy) setErrors({ ...errors, privacy: "" })
+                        if (errors.privacy) setErrors({ ...errors, privacy: '' })
                       }}
                       className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
                     />
                     <span className="text-sm text-foreground/80">
-                      {t.contact.privacy}{" "}
+                      {t.contact.privacy}{' '}
                       <a
-                        href={lang === "ro" ? "/politica-confidentialitate" : "/privacy-policy"}
+                        href={lang === 'ro' ? '/politica-confidentialitate' : '/privacy-policy'}
                         className="text-primary underline underline-offset-2 hover:text-primary/80"
                       >
                         {t.contact.privacyLink}
                       </a>
                     </span>
                   </label>
-                  {errors.privacy && <p className="mt-1 text-xs text-destructive">{errors.privacy}</p>}
+                  {errors.privacy && (
+                    <p className="mt-1 text-xs text-destructive">{errors.privacy}</p>
+                  )}
                 </div>
 
                 {/* Submit button */}
@@ -231,8 +239,13 @@ export function ContactSection() {
                     <Phone className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.contact.info.phone}</p>
-                    <a href="tel:+40XXXXXXXXX" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      {t.contact.info.phone}
+                    </p>
+                    <a
+                      href="tel:+40XXXXXXXXX"
+                      className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    >
                       +40 XXX XXX XXX
                     </a>
                   </div>
@@ -243,8 +256,13 @@ export function ContactSection() {
                     <Mail className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.contact.info.email}</p>
-                    <a href="mailto:contact@dririnabosinceanu.ro" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      {t.contact.info.email}
+                    </p>
+                    <a
+                      href="mailto:contact@dririnabosinceanu.ro"
+                      className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    >
                       contact@dririnabosinceanu.ro
                     </a>
                   </div>
@@ -255,8 +273,12 @@ export function ContactSection() {
                     <MapPin className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.contact.info.address}</p>
-                    <p className="text-sm font-medium text-foreground">{t.contact.info.addressValue}</p>
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      {t.contact.info.address}
+                    </p>
+                    <p className="text-sm font-medium text-foreground">
+                      {t.contact.info.addressValue}
+                    </p>
                   </div>
                 </div>
 
@@ -265,7 +287,9 @@ export function ContactSection() {
                     <Clock className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.contact.info.hours}</p>
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      {t.contact.info.hours}
+                    </p>
                     <div className="text-sm font-medium text-foreground">
                       <p>{t.contact.info.weekdays}</p>
                       <p>{t.contact.info.saturday}</p>

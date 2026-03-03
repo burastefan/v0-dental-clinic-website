@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
-import { ArrowLeft, Shield } from "lucide-react"
-import Link from "next/link"
-import { useLanguage } from "@/lib/language-context"
-import { LanguageSwitcher } from "./language-switcher"
+import { ArrowLeft, Shield } from 'lucide-react'
+import Link from 'next/link'
+import { useLanguage } from '@/lib/language-context'
+import { LanguageSwitcher } from './language-switcher'
 
 export function PrivacyContent() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
 
   return (
     <div className="min-h-screen bg-background">
@@ -34,12 +34,8 @@ export function PrivacyContent() {
             GDPR
           </span>
         </div>
-        <h1 className="text-3xl font-bold text-foreground sm:text-4xl mb-2">
-          {t.privacy.title}
-        </h1>
-        <p className="text-sm text-muted-foreground mb-12">
-          {t.privacy.lastUpdated}
-        </p>
+        <h1 className="text-3xl font-bold text-foreground sm:text-4xl mb-2">{t.privacy.title}</h1>
+        <p className="text-sm text-muted-foreground mb-12">{t.privacy.lastUpdated}</p>
 
         <div className="flex flex-col gap-10">
           {t.privacy.sections.map((section, index) => (
@@ -57,7 +53,7 @@ export function PrivacyContent() {
             className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
           >
             <ArrowLeft className="h-4 w-4" />
-            {lang === "ro" ? "Inapoi la pagina principala" : "Back to homepage"}
+            {lang === 'ro' ? 'Inapoi la pagina principala' : 'Back to homepage'}
           </Link>
         </div>
       </main>

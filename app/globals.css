@@ -1,47 +1,45 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #FFFFFF;
-  --foreground: #2C3E50;
-  --card: #FFFFFF;
-  --card-foreground: #2C3E50;
-  --popover: #FFFFFF;
-  --popover-foreground: #2C3E50;
-  --primary: #4A90E2;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F8FAFB;
-  --secondary-foreground: #2C3E50;
-  --muted: #F0F4F8;
-  --muted-foreground: #5A6E80;
-  --accent: #7ED8C8;
-  --accent-foreground: #1A2E3B;
-  --destructive: #E74C3C;
-  --destructive-foreground: #FFFFFF;
-  --border: #E2E8F0;
-  --input: #E2E8F0;
-  --ring: #4A90E2;
-  --chart-1: #4A90E2;
-  --chart-2: #7ED8C8;
-  --chart-3: #F8B739;
-  --chart-4: #2C3E50;
-  --chart-5: #A3D9CC;
+  --background: #ffffff;
+  --foreground: #2c3e50;
+  --card: #ffffff;
+  --card-foreground: #2c3e50;
+  --popover: #ffffff;
+  --popover-foreground: #2c3e50;
+  --primary: #4a90e2;
+  --primary-foreground: #ffffff;
+  --secondary: #f8fafb;
+  --secondary-foreground: #2c3e50;
+  --muted: #f0f4f8;
+  --muted-foreground: #5a6e80;
+  --accent: #7ed8c8;
+  --accent-foreground: #1a2e3b;
+  --destructive: #e74c3c;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #4a90e2;
+  --chart-1: #4a90e2;
+  --chart-2: #7ed8c8;
+  --chart-3: #f8b739;
+  --chart-4: #2c3e50;
+  --chart-5: #a3d9cc;
   --radius: 0.75rem;
-  --sidebar: #F8FAFB;
-  --sidebar-foreground: #2C3E50;
-  --sidebar-primary: #4A90E2;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F0F4F8;
-  --sidebar-accent-foreground: #2C3E50;
-  --sidebar-border: #E2E8F0;
-  --sidebar-ring: #4A90E2;
-  --highlight: #F8B739;
-  --highlight-foreground: #2C3E50;
+  --sidebar: #f8fafb;
+  --sidebar-foreground: #2c3e50;
+  --sidebar-primary: #4a90e2;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0f4f8;
+  --sidebar-accent-foreground: #2c3e50;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #4a90e2;
+  --highlight: #f8b739;
+  --highlight-foreground: #2c3e50;
 }
-
-
 
 @theme inline {
   --font-sans: 'Plus Jakarta Sans', 'Geist', 'Geist Fallback';

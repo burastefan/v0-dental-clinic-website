@@ -1,9 +1,9 @@
-import { PrivacyContent } from "@/components/privacy-content"
-import type { Metadata } from "next"
+import type { Metadata } from 'next'
+import { PrivacyContent } from '@/components/privacy-content'
 
 export const metadata: Metadata = {
-  title: "Politica de Confidentialitate | Dr. Irina Bosinceanu",
-  description: "Politica de confidentialitate si protectia datelor personale conform GDPR.",
+  title: 'Politica de Confidentialitate | Dr. Irina Bosinceanu',
+  description: 'Politica de confidentialitate si protectia datelor personale conform GDPR.',
 }
 
 export default function PrivacyPolicyRO() {

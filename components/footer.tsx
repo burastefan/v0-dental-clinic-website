@@ -1,19 +1,19 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram } from "lucide-react"
-import { useLanguage } from "@/lib/language-context"
+import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react'
+import Link from 'next/link'
+import { useLanguage } from '@/lib/language-context'
 
 export function Footer() {
   const { t, lang } = useLanguage()
 
   const navLinks = [
-    { label: t.nav.about, href: "/despre" },
-    { label: t.nav.services, href: "/servicii" },
-    { label: t.nav.contact, href: "/contact" },
+    { label: t.nav.about, href: '/despre' },
+    { label: t.nav.services, href: '/servicii' },
+    { label: t.nav.contact, href: '/contact' },
     {
       label: t.footer.privacy,
-      href: lang === "ro" ? "/politica-confidentialitate" : "/privacy-policy",
+      href: lang === 'ro' ? '/politica-confidentialitate' : '/privacy-policy',
     },
   ]
 
@@ -28,13 +28,13 @@ export function Footer() {
                 <span className="text-sm font-bold text-primary-foreground">IB</span>
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground leading-tight">Dr. Irina Bosinceanu</p>
+                <p className="text-sm font-semibold text-foreground leading-tight">
+                  Dr. Irina Bosinceanu
+                </p>
                 <p className="text-xs text-muted-foreground leading-tight">{t.hero.greeting}</p>
               </div>
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {t.hero.subtitle}
-            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">{t.hero.subtitle}</p>
           </div>
 
           {/* Quick Links / Pages */}
@@ -114,7 +114,7 @@ export function Footer() {
             &copy; 2026 Dr. Irina Bosinceanu. {t.footer.rights}
           </p>
           <Link
-            href={lang === "ro" ? "/politica-confidentialitate" : "/privacy-policy"}
+            href={lang === 'ro' ? '/politica-confidentialitate' : '/privacy-policy'}
             className="text-xs text-muted-foreground transition-colors hover:text-primary"
           >
             {t.footer.privacy}

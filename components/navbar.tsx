@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Menu, X, Phone } from "lucide-react"
-import { useLanguage } from "@/lib/language-context"
-import { LanguageSwitcher } from "./language-switcher"
+import { Menu, Phone, X } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
+import { useLanguage } from '@/lib/language-context'
+import { LanguageSwitcher } from './language-switcher'
 
 export function Navbar() {
   const { t } = useLanguage()
@@ -13,9 +13,9 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
   const navLinks = [
-    { label: t.nav.about, href: "/despre" },
-    { label: t.nav.services, href: "/servicii" },
-    { label: t.nav.contact, href: "/contact" },
+    { label: t.nav.about, href: '/despre' },
+    { label: t.nav.services, href: '/servicii' },
+    { label: t.nav.contact, href: '/contact' },
   ]
 
   return (
@@ -31,9 +31,7 @@ export function Navbar() {
               <p className="text-sm font-semibold text-foreground leading-tight">
                 Dr. Irina Bosinceanu
               </p>
-              <p className="text-xs text-muted-foreground leading-tight">
-                {t.hero.greeting}
-              </p>
+              <p className="text-xs text-muted-foreground leading-tight">{t.hero.greeting}</p>
             </div>
           </Link>
 
@@ -47,8 +45,8 @@ export function Navbar() {
                   href={link.href}
                   className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                     isActive
-                      ? "bg-primary/10 text-primary"
-                      : "text-foreground hover:bg-muted hover:text-primary"
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-foreground hover:bg-muted hover:text-primary'
                   }`}
                 >
                   {link.label}
@@ -82,7 +80,7 @@ export function Navbar() {
       {/* Mobile menu */}
       <div
         className={`overflow-hidden transition-all duration-300 md:hidden ${
-          isOpen ? "max-h-80 border-b border-border" : "max-h-0"
+          isOpen ? 'max-h-80 border-b border-border' : 'max-h-0'
         }`}
       >
         <div className="bg-background/95 backdrop-blur-md px-4 pb-4 pt-2">
@@ -96,8 +94,8 @@ export function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className={`rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors ${
                     isActive
-                      ? "bg-primary/10 text-primary"
-                      : "text-foreground hover:bg-muted hover:text-primary"
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-foreground hover:bg-muted hover:text-primary'
                   }`}
                 >
                   {link.label}

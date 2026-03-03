@@ -1,25 +1,25 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
 import {
-  Stethoscope,
-  Sparkles,
-  Shield,
-  Gem,
-  CircleDot,
-  Crown,
-  Scissors,
   AlertTriangle,
   AlignLeft,
-  Puzzle,
-  X,
-  Clock,
   CheckCircle2,
+  CircleDot,
+  Clock,
+  Crown,
+  Gem,
   Heart,
   Phone,
-} from "lucide-react"
-import { useLanguage } from "@/lib/language-context"
+  Puzzle,
+  Scissors,
+  Shield,
+  Sparkles,
+  Stethoscope,
+  X,
+} from 'lucide-react'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { useLanguage } from '@/lib/language-context'
 
 const serviceIcons = [
   Stethoscope,
@@ -34,21 +34,23 @@ const serviceIcons = [
   Puzzle,
 ]
 
-type ServiceItem = {
-  name: string
-  price: string
-  description: string
-  detailed: string
-  includes: string
-  duration: string
-  aftercare: string
-}
-
 export function ServicesSection() {
   const { t } = useLanguage()
   const [selectedService, setSelectedService] = useState<number | null>(null)
 
-  const services = t.services.list as unknown as ServiceItem[]
+  const services = t.services.list
+  const currentService = selectedService !== null ? services[selectedService] : null
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && selectedService !== null) {
+        setSelectedService(null)
+      }
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [selectedService])
 
   return (
     <section className="py-14 lg:py-20 bg-background">
@@ -74,12 +76,13 @@ export function ServicesSection() {
 
             return (
               <button
-                key={index}
+                type="button"
+                key={service.name}
                 onClick={() => setSelectedService(index)}
                 className={`group relative rounded-2xl border bg-card p-6 transition-all hover:shadow-lg hover:-translate-y-1 cursor-pointer text-left ${
                   isEmergency
-                    ? "border-destructive/30 bg-destructive/5 hover:border-destructive/50"
-                    : "border-border hover:border-primary/30"
+                    ? 'border-destructive/30 bg-destructive/5 hover:border-destructive/50'
+                    : 'border-border hover:border-primary/30'
                 }`}
               >
                 {/* Icon & Emergency badge */}
@@ -87,15 +90,15 @@ export function ServicesSection() {
                   <div
                     className={`flex h-12 w-12 items-center justify-center rounded-xl ${
                       isEmergency
-                        ? "bg-destructive/10 text-destructive"
-                        : "bg-primary/10 text-primary"
+                        ? 'bg-destructive/10 text-destructive'
+                        : 'bg-primary/10 text-primary'
                     }`}
                   >
                     <Icon className="h-6 w-6" />
                   </div>
                   {isEmergency && (
                     <span className="rounded-full bg-destructive px-2.5 py-1 text-xs font-semibold text-destructive-foreground">
-                      {"!"}
+                      {'!'}
                     </span>
                   )}
                 </div>
@@ -112,14 +115,16 @@ export function ServicesSection() {
 
                 {/* Price */}
                 <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
-                  <span className={`text-sm font-bold ${isEmergency ? "text-destructive" : "text-primary"}`}>
+                  <span
+                    className={`text-sm font-bold ${isEmergency ? 'text-destructive' : 'text-primary'}`}
+                  >
                     {service.price}
                   </span>
                   <span
                     className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
                       isEmergency
-                        ? "bg-destructive/10 text-destructive group-hover:bg-destructive/20"
-                        : "bg-primary/10 text-primary group-hover:bg-primary/20"
+                        ? 'bg-destructive/10 text-destructive group-hover:bg-destructive/20'
+                        : 'bg-primary/10 text-primary group-hover:bg-primary/20'
                     }`}
                   >
                     {t.services.details}
@@ -150,12 +155,13 @@ export function ServicesSection() {
           </a>
         </div>
       </div>
-
-      {/* Service Detail Modal */}
-      {selectedService !== null && (
+      {currentService && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/50 backdrop-blur-sm"
           onClick={() => setSelectedService(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
         >
           <div
             className="relative w-full max-w-lg rounded-2xl bg-card shadow-2xl max-h-[85vh] overflow-y-auto"
@@ -166,20 +172,22 @@ export function ServicesSection() {
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                   {(() => {
-                    const Icon = serviceIcons[selectedService] || Stethoscope
+                    const Icon =
+                      selectedService !== null
+                        ? serviceIcons[selectedService] || Stethoscope
+                        : Stethoscope
                     return <Icon className="h-5 w-5 text-primary" />
                   })()}
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-foreground leading-tight">
-                    {services[selectedService].name}
+                  <h3 id="modal-title" className="text-lg font-bold text-foreground leading-tight">
+                    {currentService.name}
                   </h3>
-                  <p className="text-sm font-semibold text-primary">
-                    {services[selectedService].price}
-                  </p>
+                  <p className="text-sm font-semibold text-primary">{currentService.price}</p>
                 </div>
               </div>
               <button
+                type="button"
                 onClick={() => setSelectedService(null)}
                 className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 aria-label="Close"
@@ -191,24 +199,28 @@ export function ServicesSection() {
             {/* Modal body */}
             <div className="p-6 flex flex-col gap-6">
               <p className="text-sm leading-relaxed text-foreground/80">
-                {services[selectedService].detailed}
+                {currentService.detailed}
               </p>
 
               {/* Duration */}
               <div className="flex items-start gap-3 rounded-xl bg-muted p-4">
                 <Clock className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.services.duration}</p>
-                  <p className="text-sm text-foreground">{services[selectedService].duration}</p>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    {t.services.duration}
+                  </p>
+                  <p className="text-sm text-foreground">{currentService.duration}</p>
                 </div>
               </div>
 
               {/* Includes */}
               <div>
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">{t.services.includes}</p>
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+                  {t.services.includes}
+                </p>
                 <div className="flex flex-col gap-2">
-                  {services[selectedService].includes.split(", ").map((item, i) => (
-                    <div key={i} className="flex items-center gap-2">
+                  {currentService.includes.split(', ').map((item) => (
+                    <div key={item} className="flex items-center gap-2">
                       <CheckCircle2 className="h-4 w-4 text-accent shrink-0" />
                       <span className="text-sm text-foreground/80">{item}</span>
                     </div>
@@ -220,8 +232,12 @@ export function ServicesSection() {
               <div className="flex items-start gap-3 rounded-xl bg-accent/10 border border-accent/20 p-4">
                 <Heart className="h-5 w-5 text-accent-foreground shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.services.aftercare}</p>
-                  <p className="text-sm text-foreground/80 leading-relaxed">{services[selectedService].aftercare}</p>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    {t.services.aftercare}
+                  </p>
+                  <p className="text-sm text-foreground/80 leading-relaxed">
+                    {currentService.aftercare}
+                  </p>
                 </div>
               </div>
 

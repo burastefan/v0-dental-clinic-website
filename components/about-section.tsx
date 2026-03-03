@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import Image from "next/image"
-import { GraduationCap, Award, Heart, CheckCircle2 } from "lucide-react"
-import { useLanguage } from "@/lib/language-context"
+import { Award, CheckCircle2, GraduationCap, Heart } from 'lucide-react'
+import Image from 'next/image'
+import { useLanguage } from '@/lib/language-context'
 
 export function AboutSection() {
   const { t } = useLanguage()
@@ -39,12 +39,8 @@ export function AboutSection() {
 
           {/* Bio text */}
           <div>
-            <p className="text-base leading-relaxed text-foreground/80">
-              {t.about.bio}
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-foreground/80">
-              {t.about.bio2}
-            </p>
+            <p className="text-base leading-relaxed text-foreground/80">{t.about.bio}</p>
+            <p className="mt-4 text-base leading-relaxed text-foreground/80">{t.about.bio2}</p>
 
             {/* Philosophy */}
             <div className="mt-8 rounded-xl bg-primary/5 border border-primary/10 p-6">

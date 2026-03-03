@@ -1,20 +1,17 @@
-import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import type { Metadata } from 'next'
 import { LanguageProvider } from '@/lib/language-context'
 import './globals.css'
 
-const _plusJakarta = Plus_Jakarta_Sans({ subsets: ["latin", "latin-ext"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
-
 export const metadata: Metadata = {
   title: 'Dr. Irina Bosinceanu | Cabinet Stomatologic',
-  description: 'Cabinet stomatologic modern cu servicii personalizate. Modern dental clinic with personalized care.',
+  description:
+    'Cabinet stomatologic modern cu servicii personalizate. Modern dental clinic with personalized care.',
   generator: 'v0.app',
   alternates: {
     languages: {
-      'ro': '/',
-      'en': '/en',
+      ro: '/',
+      en: '/en',
     },
   },
   icons: {
@@ -52,9 +49,7 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="en" href="https://dririnabosinceanu.ro/en" />
       </head>
       <body className="font-sans antialiased">
-        <LanguageProvider>
-          {children}
-        </LanguageProvider>
+        <LanguageProvider>{children}</LanguageProvider>
         <Analytics />
       </body>
     </html>

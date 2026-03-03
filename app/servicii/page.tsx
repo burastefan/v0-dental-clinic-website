@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { Navbar } from "@/components/navbar"
-import { ServicesSection } from "@/components/services-section"
-import { Footer } from "@/components/footer"
+import { Footer } from '@/components/footer'
+import { Navbar } from '@/components/navbar'
+import { ServicesSection } from '@/components/services-section'
 
 export default function ServicesPage() {
   return (

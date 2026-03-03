@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { Navbar } from "@/components/navbar"
-import { ContactSection } from "@/components/contact-section"
-import { Footer } from "@/components/footer"
+import { ContactSection } from '@/components/contact-section'
+import { Footer } from '@/components/footer'
+import { Navbar } from '@/components/navbar'
 
 export default function ContactPage() {
   return (
